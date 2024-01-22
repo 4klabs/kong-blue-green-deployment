@@ -1,0 +1,24 @@
+_format_version: '1.1'
+
+upstreams:
+  - name: default-upstream
+    hash_on: none
+    algorithm: round-robin
+    targets:
+      - target: app_blue:3000
+        weight: 50
+      - target: app_green:3000
+        weight: 30
+      - target: app_red:3000
+        weight: 20
+
+services:
+  - host: default-upstream
+    name: default-service
+    port: 443
+    routes:
+      - name: default-route
+        methods:
+          - GET
+        paths:
+          - /
